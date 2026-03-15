@@ -17,19 +17,11 @@
         <article>
             <h1>Go Concurrency Patterns</h1>
             <div class="date" style="margin-bottom: 2rem;">Mar 16, 2026</div>
-            <div class="content"><h1>Understanding Go Concurrency Patterns</h1>
-
-<p>
-Go&rsquo;s concurrency model is one of its most powerful features. Built around goroutines and channels, it makes concurrent programming accessible and efficient.
-</p>
-
-<h2>Goroutines: Lightweight Threads</h2>
-
-<p>
-Goroutines are functions that run concurrently with other functions. They&rsquo;re incredibly lightweight - you can spawn thousands without significant overhead.
-
-<code>go
-func main() {
+            <div class="content"><h1 id="understanding-go-concurrency-patterns">Understanding Go Concurrency Patterns</h1>
+<p>Go's concurrency model is one of its most powerful features. Built around goroutines and channels, it makes concurrent programming accessible and efficient.</p>
+<h2 id="goroutines-lightweight-threads">Goroutines: Lightweight Threads</h2>
+<p>Goroutines are functions that run concurrently with other functions. They're incredibly lightweight - you can spawn thousands without significant overhead.</p>
+<pre><code class="language-go">func main() {
     go sayHello(&quot;World&quot;)
     time.Sleep(time.Second)
 }
@@ -37,16 +29,10 @@ func main() {
 func sayHello(name string) {
     fmt.Printf(&quot;Hello, %s!\n&quot;, name)
 }
-</code>
-</p>
-
-<h2>Channels: Communication Between Goroutines</h2>
-
-<p>
-Channels provide a way for goroutines to communicate and synchronize their execution.
-
-<code>go
-func main() {
+</code></pre>
+<h2 id="channels-communication-between-goroutines">Channels: Communication Between Goroutines</h2>
+<p>Channels provide a way for goroutines to communicate and synchronize their execution.</p>
+<pre><code class="language-go">func main() {
     ch := make(chan string)
     
     go func() {
@@ -56,18 +42,15 @@ func main() {
     message := &lt;-ch
     fmt.Println(message)
 }
-</code>
-</p>
-
-<h2>Best Practices</h2>
-
-<p>
-1. <strong>Don&rsquo;t communicate by sharing memory; share memory by communicating</strong>
-2. <strong>Use buffered channels when appropriate</strong>
-3. <strong>Always handle channel closing properly</strong>
-4. <strong>Avoid goroutine leaks with proper cleanup</strong>
-
-Go&rsquo;s concurrency primitives make it an excellent choice for building scalable backend systems and microservices.</p>
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Don't communicate by sharing memory; share memory by communicating</strong></li>
+<li><strong>Use buffered channels when appropriate</strong></li>
+<li><strong>Always handle channel closing properly</strong></li>
+<li><strong>Avoid goroutine leaks with proper cleanup</strong></li>
+</ol>
+<p>Go's concurrency primitives make it an excellent choice for building scalable backend systems and microservices.</p>
 </div>
         </article>
     </main>

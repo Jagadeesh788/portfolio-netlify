@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"html/template"
 	"io/fs"
@@ -9,7 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/russross/blackfriday/v2"
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/parser"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
 type Article struct {
@@ -91,7 +95,14 @@ func getArticles() []Article {
 		}
 
 		content, _ := os.ReadFile(path)
-		html := blackfriday.Run(content, blackfriday.WithExtensions(blackfriday.CommonExtensions|blackfriday.FencedCode))
+		md := goldmark.New(
+			goldmark.WithExtensions(extension.GFM),
+			goldmark.WithParserOptions(parser.WithAutoHeadingID()),
+			goldmark.WithRendererOptions(html.WithUnsafe()),
+		)
+		var buf bytes.Buffer
+		md.Convert(content, &buf)
+		htmlContent := buf.String()
 
 		filename := strings.TrimSuffix(filepath.Base(path), ".md")
 		title := strings.ReplaceAll(filename, "-", " ")
@@ -101,7 +112,7 @@ func getArticles() []Article {
 			Title:   title,
 			Date:    time.Now().Format("Jan 2, 2006"),
 			Slug:    filename,
-			Content: template.HTML(html),
+			Content: template.HTML(htmlContent),
 			Summary: extractSummary(string(content)),
 		})
 		return nil

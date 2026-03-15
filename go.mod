@@ -2,4 +2,4 @@ module portfolio
 
 go 1.22
 
-require github.com/russross/blackfriday/v2 v2.1.0
+require github.com/yuin/goldmark v1.7.16
