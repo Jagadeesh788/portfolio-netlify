@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Rest Apis Go</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="../index.html" style="color: white; text-decoration: none;">← Back to Portfolio</a></h1>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 3rem 0;">
+        <article>
+            <h1>Building Rest Apis Go</h1>
+            <div class="date" style="margin-bottom: 2rem;">Mar 15, 2026</div>
+            <div class="content"><h1>Building REST APIs with Go</h1>
+
+<p>
+Go&rsquo;s standard library provides excellent support for building HTTP servers and REST APIs. Here&rsquo;s how to create efficient, scalable APIs.
+</p>
+
+<h2>Basic HTTP Server</h2>
+
+<p>
+<code>go
+package main
+
+import (
+    &quot;encoding/json&quot;
+    &quot;log&quot;
+    &quot;net/http&quot;
+)
+
+type User struct {
+    ID   int    `json:&quot;id&quot;`
+    Name string `json:&quot;name&quot;`
+}
+
+func main() {
+    http.HandleFunc(&quot;/users&quot;, handleUsers)
+    log.Fatal(http.ListenAndServe(&quot;:8080&quot;, nil))
+}
+
+func handleUsers(w http.ResponseWriter, r *http.Request) {
+    users := []User{
+        {ID: 1, Name: &quot;John Doe&quot;},
+        {ID: 2, Name: &quot;Jane Smith&quot;},
+    }
+    
+    w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
+    json.NewEncoder(w).Encode(users)
+}
+</code>
+</p>
+
+<h2>Using Gorilla Mux for Routing</h2>
+
+<p>
+For more complex routing, Gorilla Mux is a popular choice:
+
+<code>go
+import &quot;github.com/gorilla/mux&quot;
+
+func main() {
+    r := mux.NewRouter()
+    r.HandleFunc(&quot;/users&quot;, getUsers).Methods(&quot;GET&quot;)
+    r.HandleFunc(&quot;/users/{id}&quot;, getUser).Methods(&quot;GET&quot;)
+    
+    http.ListenAndServe(&quot;:8080&quot;, r)
+}
+</code>
+</p>
+
+<h2>Key Considerations</h2>
+
+<p>
+- <strong>Middleware</strong>: Use middleware for authentication, logging, and CORS
+- <strong>Error Handling</strong>: Implement consistent error responses
+- <strong>Validation</strong>: Validate input data thoroughly
+- <strong>Testing</strong>: Write comprehensive tests for your endpoints
+
+Go&rsquo;s performance and simplicity make it ideal for building production-ready APIs.</p>
+</div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Jagadeesh Patil. Built with Go.</p>
+        </div>
+    </footer>
+</body>
+</html>

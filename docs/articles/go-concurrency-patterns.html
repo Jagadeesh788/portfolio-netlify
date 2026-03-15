@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Concurrency Patterns</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="../index.html" style="color: white; text-decoration: none;">← Back to Portfolio</a></h1>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 3rem 0;">
+        <article>
+            <h1>Go Concurrency Patterns</h1>
+            <div class="date" style="margin-bottom: 2rem;">Mar 15, 2026</div>
+            <div class="content"><h1>Understanding Go Concurrency Patterns</h1>
+
+<p>
+Go&rsquo;s concurrency model is one of its most powerful features. Built around goroutines and channels, it makes concurrent programming accessible and efficient.
+</p>
+
+<h2>Goroutines: Lightweight Threads</h2>
+
+<p>
+Goroutines are functions that run concurrently with other functions. They&rsquo;re incredibly lightweight - you can spawn thousands without significant overhead.
+
+<code>go
+func main() {
+    go sayHello(&quot;World&quot;)
+    time.Sleep(time.Second)
+}
+
+func sayHello(name string) {
+    fmt.Printf(&quot;Hello, %s!\n&quot;, name)
+}
+</code>
+</p>
+
+<h2>Channels: Communication Between Goroutines</h2>
+
+<p>
+Channels provide a way for goroutines to communicate and synchronize their execution.
+
+<code>go
+func main() {
+    ch := make(chan string)
+    
+    go func() {
+        ch &lt;- &quot;Hello from goroutine!&quot;
+    }()
+    
+    message := &lt;-ch
+    fmt.Println(message)
+}
+</code>
+</p>
+
+<h2>Best Practices</h2>
+
+<p>
+1. <strong>Don&rsquo;t communicate by sharing memory; share memory by communicating</strong>
+2. <strong>Use buffered channels when appropriate</strong>
+3. <strong>Always handle channel closing properly</strong>
+4. <strong>Avoid goroutine leaks with proper cleanup</strong>
+
+Go&rsquo;s concurrency primitives make it an excellent choice for building scalable backend systems and microservices.</p>
+</div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Jagadeesh Patil. Built with Go.</p>
+        </div>
+    </footer>
+</body>
+</html>
